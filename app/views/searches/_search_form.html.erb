@@ -1,14 +1,20 @@
 <% if user_signed_in? %>
 <div class="container">
   <div class="row">
-    <div class="col-5 mx-auto">
+    <div class="col">
       <%= form_with url: search_path,local:true, method: :get do |f| %>
-
-          <%= f.text_field :search %>
-          <%= f.select :type, {"Book": "book", "User": "user"} %>
-          <%= f.select :method, {"完全一致": 1, "前方一致": 2, "後方一致": 3, "部分一致": 4} %>
-          <%= f.submit "検索" %>
-
+        <%= f.text_field :search %>
+        <%= f.select :type, {"Book": "book", "User": "user"} %>
+        <%= f.select :method, {"完全一致": 'perfect', "前方一致": 'forward', "後方一致": 'backward', "部分一致": "partial"} %>
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+    <div class="col">
+      <%= form_with url: search_path,local:true, method: :get do |f| %>
+        <%= f.text_field :search %>
+        <%= f.hidden_field type: "tag" %>
+        <%= f.hidden_field method: "perfect" %>
+        <%= f.submit "タグ検索" %>
       <% end %>
     </div>
   </div>

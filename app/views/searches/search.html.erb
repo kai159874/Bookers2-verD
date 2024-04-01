@@ -1,7 +1,10 @@
 <% if @type == "book" %>
   <h2>Books search for "<%= @search %>"</h2>
   <%= render "books/index", books: @books %>
-<% else %>
+<% elsif @type == "user" %>
   <h2>Users search for "<%= @search %>"</h2>
   <%= render "users/index", users: @users %>
+<% else %>
+  <h2>Books search for "<%= @search %>"</h2>
+  <%= render "books/index", books: @books %>
 <% end %>

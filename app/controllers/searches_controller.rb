@@ -4,26 +4,28 @@ class SearchesController < ApplicationController
     @type = params[:type]
     @search = params[:search]
     if params[:type] == "book"
-      if params[:method] == "1"
+      if params[:method] == 'perfect'
         @books = Book.where("title LIKE ?", "#{@search}")
-      elsif params[:method] == "2"
+      elsif params[:method] == 'forward'
         @books = Book.where("title LIKE ?", "#{@search}%")
-      elsif params[:method] == "3"
+      elsif params[:method] == 'backward'
         @books = Book.where("title LIKE ?", "%#{@search}")
       else
         @books = Book.where("title LIKE ?", "%#{@search}%")
       end
-    else
-      if params[:method] == "1"
+    elsif params[:type] == "user"
+      if params[:method] == 'perfect'
         @users = User.where("name LIKE ?", "#{@search}")
-      elsif params[:method] == "2"
+      elsif params[:method] == 'forward'
         @users = User.where("name LIKE ?", "#{@search}%")
-      elsif params[:method] == "3"
+      elsif params[:method] == 'backward'
         @users = User.where("name LIKE ?", "%#{@search}")
       else
         @users = User.where("name LIKE ?", "%#{@search}%")
       end
+    else
+      @books = Book.where("tag LIKE ?", "#{@search}")
     end
   end
-  
+
 end
