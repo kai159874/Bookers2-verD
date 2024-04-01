@@ -8,8 +8,14 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
     @book = Book.new
+
+    if params[:sort] == "star"
+      @books = Book.all.sort_by{ |book| book[:star] }.reverse
+    else
+      @books = Book.all
+    end
+
   end
 
   def create
